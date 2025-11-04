@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tech.Care — Patient Dashboard (Jessica Taylor)</title>
+  <meta name="description" content="Patient dashboard for Jessica Taylor showing vitals, diagnosis history, diagnostics, and lab results." />
+
+  <!-- Chart.js (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
+  <!-- Fonts (optional, swap to match XD if you have exact family) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- App styles -->
+  <link rel="stylesheet" href="./styles.css" />
+  <!-- App logic -->
+  <script src="./app.js" defer></script>
+</head>
+
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar" aria-label="Patient list">
+      <div class="logo">
+        <span class="logo-dot" aria-hidden="true"></span>
+        <span class="logo-text">Tech.Care</span>
+      </div>
+
+      <div class="sidebar-section">
+        <h2 class="sidebar-title">Patients</h2>
+        <!-- List scrolls; we still fetch all but visually highlight Jessica -->
+        <ul id="patientList" class="patient-list" role="list" aria-live="polite"></ul>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main" id="main" tabindex="-1">
+      <header class="topbar" role="banner">
+        <h1 class="page-title">Patient Dashboard</h1>
+        <div class="topbar-actions" role="group" aria-label="Page actions">
+          <button class="ghost-btn" type="button" aria-label="Notifications">
+            ⋯
+          </button>
+          <button class="ghost-btn" type="button" aria-label="Settings">
+            ⚙
+          </button>
+        </div>
+      </header>
+
+      <!-- Patient header card -->
+      <section class="card card--patient" aria-labelledby="patientName">
+        <img id="patientAvatar" class="avatar" src="" alt="Profile picture of Jessica Taylor" />
+        <div class="patient-meta">
+          <h2 id="patientName" class="patient-name">Jessica Taylor</h2>
+          <p class="patient-sub">Female • <span id="patientDOB">—</span></p>
+          <div class="patient-grid">
+            <div><span class="muted">Phone</span><br /><span id="patientPhone">—</span></div>
+            <div><span class="muted">Emergency</span><br /><span id="patientEmergency">—</span></div>
+            <div><span class="muted">Insurance</span><br /><span id="patientInsurance">—</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Vitals / chart row -->
+      <section class="grid-2">
+        <article class="card" aria-labelledby="bpTitle">
+          <div class="card-head">
+            <h3 id="bpTitle">Blood Pressure (Yearly)</h3>
+            <span class="subtle" id="bpSubtitle">Systolic / Diastolic</span>
+          </div>
+          <canvas id="bpChart" height="140" aria-label="Line chart of yearly blood pressure" role="img"></canvas>
+        </article>
+
+        <article class="card" aria-labelledby="vitalsTitle">
+          <div class="card-head">
+            <h3 id="vitalsTitle">Latest Vitals</h3>
+          </div>
+          <div class="vitals">
+            <div class="vital">
+              <div class="vital-key">Heart Rate</div>
+              <div class="vital-value"><span id="heartRateValue">—</span> bpm</div>
+              <div class="vital-level" id="heartRateLevel">—</div>
+            </div>
+            <div class="vital">
+              <div class="vital-key">Respiratory Rate</div>
+              <div class="vital-value"><span id="respRateValue">—</span> rpm</div>
+              <div class="vital-level" id="respRateLevel">—</div>
+            </div>
+            <div class="vital">
+              <div class="vital-key">Temperature</div>
+              <div class="vital-value"><span id="tempValue">—</span> °F</div>
+              <div class="vital-level" id="tempLevel">—</div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Diagnosis / Diagnostics / Labs -->
+      <section class="grid-3">
+        <article class="card" aria-labelledby="dxHistoryTitle">
+          <div class="card-head">
+            <h3 id="dxHistoryTitle">Diagnosis History</h3>
+          </div>
+          <ul id="dxHistory" class="list list--spaced" role="list"></ul>
+        </article>
+
+        <article class="card" aria-labelledby="dxListTitle">
+          <div class="card-head">
+            <h3 id="dxListTitle">Diagnostic List</h3>
+          </div>
+          <ul id="dxList" class="list list--tags" role="list"></ul>
+        </article>
+
+        <article class="card" aria-labelledby="labResultsTitle">
+          <div class="card-head">
+            <h3 id="labResultsTitle">Lab Results</h3>
+          </div>
+          <ul id="labResults" class="list list--files" role="list"></ul>
+        </article>
+      </section>
+    </main>
+
+    <!-- Right profile column -->
+    <aside class="profile" aria-label="Selected patient">
+      <div class="profile-inner">
+        <img id="profileAvatar" class="profile-avatar" src="" alt="Profile picture of Jessica Taylor" />
+        <h2 id="profileName" class="profile-name">Jessica Taylor</h2>
+        <p class="profile-sub" id="profileBio">—</p>
+        <dl class="profile-kv">
+          <dt>Date of Birth</dt><dd id="pDOB">—</dd>
+          <dt>Gender</dt><dd id="pGender">—</dd>
+          <dt>Phone</dt><dd id="pPhone">—</dd>
+          <dt>Emergency</dt><dd id="pEmergency">—</dd>
+          <dt>Insurance</dt><dd id="pInsurance">—</dd>
+        </dl>
+      </div>
+    </aside>
+  </div>
+</body>
+</html>
